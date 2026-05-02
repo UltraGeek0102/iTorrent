@@ -94,7 +94,8 @@ class TorrentListViewController<VM: TorrentListViewModel>: BaseViewController<VM
             },
             UIAction(title: %"list.add.url", image: .init(systemName: "link.badge.plus")) { [unowned self] _ in
                 present(makeUrlAlert(), animated: true)
-            }
+            },
+            makeHttpDownloadAction() 
         ])
 
         playButton.primaryAction = .init(title: %"details.start", image: .init(systemName: "play.fill"), handler: { [unowned self] _ in
@@ -121,6 +122,8 @@ class TorrentListViewController<VM: TorrentListViewModel>: BaseViewController<VM
                 }
             }
         }
+        let downloadsBtn = makeDownloadsButton()
+        navigationItem.rightBarButtonItems = (navigationItem.rightBarButtonItems ?? []) + [downloadsBtn]
 
         binding()
 
