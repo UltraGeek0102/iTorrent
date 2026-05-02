@@ -15,6 +15,7 @@ extension SceneDelegate {
             if tryOpenAddTorrent(with: url) { return }
             if tryOpenAddMagnet(with: url) { return }
             if await tryOpenRemoteAddTorrent(with: url) { return }
+            tryStartHttpDownload(with: url)
         }
     }
 }
