@@ -4,16 +4,15 @@
 //
 //  Created by Даниил Виноградов on 19.04.2024.
 //
-
 import UIKit
 #if canImport(FirebaseCore)
 import FirebaseRemoteConfig
-let remoteConfig = RemoteConfig.remoteConfig()
 #endif
 
 extension AppDelegate {
     func registerRemoteConfig() {
 #if canImport(FirebaseCore)
+        guard FirebaseApp.app() != nil else { return }
         registerKillSwitch()
 #endif
     }
@@ -22,14 +21,13 @@ extension AppDelegate {
 #if canImport(FirebaseCore)
 private extension AppDelegate {
     func registerKillSwitch() {
+        let remoteConfig = RemoteConfig.remoteConfig()
         remoteConfig.fetchAndActivate { [unowned self] status, error in
             guard error == nil, status == .successFetchedFromRemote else { return }
             Task { try await checkKillSwitch() }
         }
-
         remoteConfig.addOnConfigUpdateListener { [unowned self] _, error in
             guard error == nil else { return }
-
             remoteConfig.activate { [unowned self] _, _ in
                 Task { try await checkKillSwitch() }
             }
@@ -38,8 +36,8 @@ private extension AppDelegate {
 
     @MainActor
     func checkKillSwitch() async throws {
+        let remoteConfig = RemoteConfig.remoteConfig()
         guard remoteConfig.configValue(forKey: "disabledBuilds").boolValue else { return }
-
         guard let keyWindow = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
             .first?.windows
@@ -48,18 +46,16 @@ private extension AppDelegate {
         else {
             exit(0)
         }
-
         let alert = UIAlertController(title: %"expire.title", message: %"expire.message", preferredStyle: .alert)
         alert.addAction(.init(title: %"expire.update", style: .cancel) { _ in
             Task {
-                let updateURL: URL 
+                let updateURL: URL
                 if let remoteURI = remoteConfig.configValue(forKey: "updateURL").stringValue,
                    let remoteURL = URL(string: remoteURI) {
                     updateURL = remoteURL
                 } else {
                     updateURL = URL(string: "https://github.com/XITRIX/iTorrent")!
                 }
-
                 await UIApplication.shared.open(updateURL)
                 try await Task.sleep(for: .seconds(1))
                 exit(0)
@@ -68,7 +64,6 @@ private extension AppDelegate {
         alert.addAction(.init(title: %"expire.exit", style: .destructive) { _ in
             exit(0)
         })
-
         topController.present(alert, animated: true)
     }
 }
