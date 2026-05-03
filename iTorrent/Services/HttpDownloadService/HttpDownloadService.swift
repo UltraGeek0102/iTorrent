@@ -2,8 +2,6 @@
 //  HttpDownloadService.swift
 //  iTorrent
 //
-//  Created for HTTP link downloading support.
-//
 
 import Combine
 import Foundation
@@ -48,8 +46,7 @@ public class HttpDownloadService: NSObject {
     @Published public var downloads: [HttpDownloadItem] = []
 
     private var session: URLSession!
-    private var taskToItem: [URLSessionTask: HttpDownloadItem] = [:]
-    private let queue = DispatchQueue(label: "com.itorrent.httpdownload", qos: .userInitiated)
+    private var taskToItem: [Int: HttpDownloadItem] = [:]  // keyed by taskIdentifier (Int) — safe across threads
 
     private static var downloadDirectory: URL {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -60,17 +57,10 @@ public class HttpDownloadService: NSObject {
 
     override init() {
         super.init()
-        let config = URLSessionConfiguration.background(withIdentifier: "com.itorrent.httpdownload.session")
-        config.isDiscretionary = false
-        config.sessionSendsLaunchEvents = true
-        session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
-
-        // Restore any in-progress tasks from previous session
-        session.getAllTasks { [weak self] tasks in
-            guard let self else { return }
-            // Background tasks that couldn't be matched are cancelled to keep state clean
-            tasks.forEach { $0.cancel() }
-        }
+        // Use a default (non-background) session to avoid background session restrictions
+        // when app is not properly signed with background modes entitlement
+        let config = URLSessionConfiguration.default
+        session = URLSession(configuration: config, delegate: self, delegateQueue: .main)
     }
 
     // MARK: - Public API
@@ -87,12 +77,10 @@ public class HttpDownloadService: NSObject {
         item.task = task
         item.state = .downloading
 
-        queue.sync {
-            taskToItem[task] = item
-            DispatchQueue.main.async { [weak self] in
-                self?.downloads.append(item)
-            }
-        }
+        // All on main thread — delegate queue is also main
+        taskToItem[task.taskIdentifier] = item
+        downloads.append(item)
+
         task.resume()
         return item
     }
@@ -100,36 +88,24 @@ public class HttpDownloadService: NSObject {
     public func pause(_ item: HttpDownloadItem) {
         guard item.state == .downloading else { return }
         item.task?.suspend()
-        DispatchQueue.main.async { item.state = .paused }
+        item.state = .paused
     }
 
     public func resume(_ item: HttpDownloadItem) {
         guard item.state == .paused else { return }
         item.task?.resume()
-        DispatchQueue.main.async { item.state = .downloading }
+        item.state = .downloading
     }
 
     public func cancel(_ item: HttpDownloadItem) {
         item.task?.cancel()
-        queue.sync {
-            if let task = item.task {
-                taskToItem.removeValue(forKey: task)
-            }
-        }
-        DispatchQueue.main.async { [weak self] in
-            self?.downloads.removeAll { $0.id == item.id }
-        }
+        taskToItem.removeValue(forKey: item.task?.taskIdentifier ?? -1)
+        downloads.removeAll { $0.id == item.id }
     }
 
     public func remove(_ item: HttpDownloadItem) {
         cancel(item)
         try? FileManager.default.removeItem(at: item.destinationURL)
-    }
-
-    // MARK: - Helpers
-
-    private func item(for task: URLSessionTask) -> HttpDownloadItem? {
-        queue.sync { taskToItem[task] }
     }
 }
 
@@ -137,28 +113,23 @@ public class HttpDownloadService: NSObject {
 
 extension HttpDownloadService: URLSessionDownloadDelegate {
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        guard let item = item(for: downloadTask) else { return }
+        guard let item = taskToItem[downloadTask.taskIdentifier] else { return }
 
         do {
-            // Remove existing file if needed
             if FileManager.default.fileExists(atPath: item.destinationURL.path) {
                 try FileManager.default.removeItem(at: item.destinationURL)
             }
             try FileManager.default.moveItem(at: location, to: item.destinationURL)
-            DispatchQueue.main.async {
-                item.state = .completed
-                item.progress = 1.0
-                NotificationCenter.default.post(name: .httpDownloadCompleted, object: item)
-            }
+            item.state = .completed
+            item.progress = 1.0
+            NotificationCenter.default.post(name: .httpDownloadCompleted, object: item)
         } catch {
-            DispatchQueue.main.async {
-                item.state = .failed
-                item.error = error
-                NotificationCenter.default.post(name: .httpDownloadFailed, object: item)
-            }
+            item.state = .failed
+            item.error = error
+            NotificationCenter.default.post(name: .httpDownloadFailed, object: item)
         }
 
-        queue.sync { taskToItem.removeValue(forKey: downloadTask) }
+        taskToItem.removeValue(forKey: downloadTask.taskIdentifier)
     }
 
     public func urlSession(_ session: URLSession,
@@ -166,28 +137,25 @@ extension HttpDownloadService: URLSessionDownloadDelegate {
                            didWriteData bytesWritten: Int64,
                            totalBytesWritten: Int64,
                            totalBytesExpectedToWrite: Int64) {
-        guard let item = item(for: downloadTask) else { return }
-        DispatchQueue.main.async {
-            item.bytesDownloaded = totalBytesWritten
-            item.totalBytes = totalBytesExpectedToWrite
-            item.progress = totalBytesExpectedToWrite > 0
-                ? Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
-                : 0
-        }
+        guard let item = taskToItem[downloadTask.taskIdentifier] else { return }
+        item.bytesDownloaded = totalBytesWritten
+        item.totalBytes = totalBytesExpectedToWrite
+        item.progress = totalBytesExpectedToWrite > 0
+            ? Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+            : 0
     }
 
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        guard let error, let item = item(for: task) else { return }
-        // Ignore cancellation errors (user-initiated)
+        guard let error else { return }
+        guard let item = taskToItem[task.taskIdentifier] else { return }
+
         let nsErr = error as NSError
         guard nsErr.code != NSURLErrorCancelled else { return }
 
-        DispatchQueue.main.async {
-            item.state = .failed
-            item.error = error
-            NotificationCenter.default.post(name: .httpDownloadFailed, object: item)
-        }
-        queue.sync { taskToItem.removeValue(forKey: task) }
+        item.state = .failed
+        item.error = error
+        NotificationCenter.default.post(name: .httpDownloadFailed, object: item)
+        taskToItem.removeValue(forKey: task.taskIdentifier)
     }
 }
 
