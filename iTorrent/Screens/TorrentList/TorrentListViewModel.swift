@@ -96,6 +96,11 @@ class TorrentListViewModel: BaseViewModel {
                     updateFilterNames()
                     return makeUngroupedSection(with: torrents, filter: filter, searchPresented: searchPresented)
                 }
+            }
+            .combineLatest(HttpDownloadService.shared.$downloads)
+            .map { sections, downloads in
+                TorrentListViewModel.injectHttpSection(downloads, into: sections)
+            }
             }.assign(to: &$sections)
             $searchQuery.assign(to: &rssSearchViewModel.$searchQuery)
 //        }
