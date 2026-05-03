@@ -27,36 +27,7 @@ extension TorrentListViewController {
 
     // MARK: - Downloads Nav Button
 
-    func makeDownloadsButton() -> UIBarButtonItem {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "arrow.down.circle"),
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        button.accessibilityLabel = "HTTP Downloads"
-
-        let action = UIAction { [weak self] _ in
-            self?.openHttpDownloads()
-        }
-        button.primaryAction = action
-
-        HttpDownloadService.shared.$downloads
-            .map { $0.filter { $0.state == .downloading || $0.state == .paused }.count }
-            .receive(on: DispatchQueue.main)
-            .sink { count in
-                button.setBadgeValue(count > 0 ? "\(count)" : nil)
-            }
-            .store(in: &downloadCancellables)
-
-        return button
-    }
-
-    func openHttpDownloads() {
-        let vm = HttpDownloadListViewModel()
-        let vc = HttpDownloadListViewController(viewModel: vm)
-        navigationController?.pushViewController(vc, animated: true)
-    }
+    
 
     // MARK: - Add menu action
 
