@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662B0EB50B0749393D8CB829 /* TorrentListViewController+HttpDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8D6BC27FCA1D907EC308F /* TorrentListViewController+HttpDownload.swift */; };
+		770BD91F68C194B62317BC13 /* HttpDownloadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12127FFE04DAE8639EA231E7 /* HttpDownloadListViewController.swift */; };
 		7C013DE32C28AA3C0026A11B /* sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C013DE22C28A97F0026A11B /* sound.m4a */; };
 		7C013DE42C2F38AA0026A11B /* LocalizationAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1352D1D2BBC2F7F00104E7B /* LocalizationAttribute.swift */; };
 		7C013DE52C2F41760026A11B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D1AA00CF2AFAC7D200B74629 /* Localizable.xcstrings */; };
@@ -127,6 +129,8 @@
 		7CFEBEA92BC721D50013233F /* RssListPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFEBEA82BC721D50013233F /* RssListPreferencesViewModel.swift */; };
 		7CFEBEAB2BC725E10013233F /* UIViewController+BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFEBEAA2BC725E10013233F /* UIViewController+BottomSheet.swift */; };
 		7CFEBEAD2BC88F4C0013233F /* AppDelegate+BackgroundRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFEBEAC2BC88F4C0013233F /* AppDelegate+BackgroundRefresh.swift */; };
+		873483B39B8B1339892B98C1 /* HttpDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A893DB012847CFAEA6FE8 /* HttpDownloadService.swift */; };
+		B0146A725E820954BED76C15 /* SceneDelegate+HttpDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830FEDB041A8CEC2CEC7897D /* SceneDelegate+HttpDownload.swift */; };
 		D10257C62EE8619300201640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10257C22EE8619300201640 /* Assets.xcassets */; };
 		D10257C82EE8619300201640 /* iTorrent_TVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10257C42EE8619300201640 /* iTorrent_TVApp.swift */; };
 		D10257C92EE8619300201640 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10257C32EE8619300201640 /* ContentView.swift */; };
@@ -265,6 +269,7 @@
 		D1F8BC852AFC405A00A6258C /* MvvmViewModel+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F8BC842AFC405A00A6258C /* MvvmViewModel+Alert.swift */; };
 		D1FFC9652C38136600233C2F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FFC9642C38135F00233C2F /* URL+Extensions.swift */; };
 		D1FFC96C2C382FC900233C2F /* StorageModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FFC96B2C382FBE00233C2F /* StorageModel+Extensions.swift */; };
+		E78DD5EEB09FC61E8F498595 /* HttpDownloadListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D05EA89359F2721C6DEF3 /* HttpDownloadListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,6 +320,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		12127FFE04DAE8639EA231E7 /* HttpDownloadListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpDownloadListViewController.swift; path = iTorrent/Screens/HttpDownloads/HttpDownloadListViewController.swift; sourceTree = SOURCE_ROOT; };
+		122A893DB012847CFAEA6FE8 /* HttpDownloadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpDownloadService.swift; path = iTorrent/Services/HttpDownloadService/HttpDownloadService.swift; sourceTree = SOURCE_ROOT; };
+		46D8D6BC27FCA1D907EC308F /* TorrentListViewController+HttpDownload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TorrentListViewController+HttpDownload.swift"; path = "iTorrent/Screens/TorrentList/TorrentListViewController+HttpDownload.swift"; sourceTree = SOURCE_ROOT; };
+		509D05EA89359F2721C6DEF3 /* HttpDownloadListViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpDownloadListViewModel.swift; path = iTorrent/Screens/HttpDownloads/HttpDownloadListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7C013DE22C28A97F0026A11B /* sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.m4a; sourceTree = "<group>"; };
 		7C04A6082C446B4D00FBC649 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C1C08A92C31F2F000569B45 /* PauseTorrentIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseTorrentIntent.swift; sourceTree = "<group>"; };
@@ -420,6 +429,7 @@
 		7CFEBEA82BC721D50013233F /* RssListPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssListPreferencesViewModel.swift; sourceTree = "<group>"; };
 		7CFEBEAA2BC725E10013233F /* UIViewController+BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BottomSheet.swift"; sourceTree = "<group>"; };
 		7CFEBEAC2BC88F4C0013233F /* AppDelegate+BackgroundRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+BackgroundRefresh.swift"; sourceTree = "<group>"; };
+		830FEDB041A8CEC2CEC7897D /* SceneDelegate+HttpDownload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SceneDelegate+HttpDownload.swift"; path = "iTorrent/Core/SceneDelegate/SceneDelegate+HttpDownload.swift"; sourceTree = SOURCE_ROOT; };
 		D10257AE2EE8614900201640 /* iTorrent-TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTorrent-TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D10257C22EE8619300201640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D10257C32EE8619300201640 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -589,6 +599,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08E9439B3CCDD2C93CCB3C5E /* HttpDownloads */ = {
+			isa = PBXGroup;
+			children = (
+				509D05EA89359F2721C6DEF3 /* HttpDownloadListViewModel.swift */,
+				12127FFE04DAE8639EA231E7 /* HttpDownloadListViewController.swift */,
+			);
+			name = HttpDownloads;
+			sourceTree = "<group>";
+		};
+		387F504A9856D114BE47B94F /* HttpDownloadService */ = {
+			isa = PBXGroup;
+			children = (
+				122A893DB012847CFAEA6FE8 /* HttpDownloadService.swift */,
+			);
+			name = HttpDownloadService;
+			sourceTree = "<group>";
+		};
+		594C1D7FFB94546C974AAE49 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				08E9439B3CCDD2C93CCB3C5E /* HttpDownloads */,
+				D6957BCED284BAC10C4250A7 /* TorrentList */,
+			);
+			name = Screens;
+			sourceTree = "<group>";
+		};
+		7737F4CE86C3738D6AE237EC /* SceneDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				830FEDB041A8CEC2CEC7897D /* SceneDelegate+HttpDownload.swift */,
+			);
+			name = SceneDelegate;
+			sourceTree = "<group>";
+		};
 		7C1C08AE2C31FEF700569B45 /* IntentsService */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +980,32 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
+		98B88E9CF05B5F85621C8556 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7737F4CE86C3738D6AE237EC /* SceneDelegate */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		A8BAA152BC6F73143359D5A8 /* iTorrent */ = {
+			isa = PBXGroup;
+			children = (
+				BD580A6ADB678E7711E87F3E /* Services */,
+				594C1D7FFB94546C974AAE49 /* Screens */,
+				98B88E9CF05B5F85621C8556 /* Core */,
+			);
+			name = iTorrent;
+			sourceTree = "<group>";
+		};
+		BD580A6ADB678E7711E87F3E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				387F504A9856D114BE47B94F /* HttpDownloadService */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		D10257C52EE8619300201640 /* iTorrent-TV */ = {
 			isa = PBXGroup;
 			children = (
@@ -1277,6 +1347,7 @@
 				7C5FBE402BC0ADC90069E5A0 /* ProgressWidget */,
 				D1A2269B2AEEEFCC00669D6D /* Products */,
 				D1A226D32AEEF73600669D6D /* Frameworks */,
+				A8BAA152BC6F73143359D5A8 /* iTorrent */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1583,6 +1654,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D6957BCED284BAC10C4250A7 /* TorrentList */ = {
+			isa = PBXGroup;
+			children = (
+				46D8D6BC27FCA1D907EC308F /* TorrentListViewController+HttpDownload.swift */,
+			);
+			name = TorrentList;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1697,9 +1776,9 @@
 			mainGroup = D1A226912AEEEFCC00669D6D;
 			packageReferences = (
 				7CF9C2B72AF7EF54009BBFA0 /* XCRemoteSwiftPackageReference "CombineCocoa" */,
-				7CF9C2C52AF7F235009BBFA0 /* XCLocalSwiftPackageReference "Submodules/MVVMFoundation" */,
+				7CF9C2C52AF7F235009BBFA0 /* XCLocalSwiftPackageReference "MVVMFoundation" */,
 				7CAD30172BC3455800592990 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
-				D1DB71812BD80318007F9267 /* XCLocalSwiftPackageReference "Submodules/GCDWebServer" */,
+				D1DB71812BD80318007F9267 /* XCLocalSwiftPackageReference "GCDWebServer" */,
 				7CF6DA312C0F112A0033D03F /* XCRemoteSwiftPackageReference "OpenSSL" */,
 				7C3142CE2C317E6400397E82 /* XCRemoteSwiftPackageReference "MarqueeText" */,
 				7C519C862C427E9A00E353A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -2019,6 +2098,11 @@
 				D1352D382BBD73CD00104E7B /* ColoredProgressBarView.swift in Sources */,
 				7C5B41022EEC321A001D4C68 /* TorrentHandle+Extensions.swift in Sources */,
 				D1A226FD2AEF04F900669D6D /* BaseViewController.swift in Sources */,
+				873483B39B8B1339892B98C1 /* HttpDownloadService.swift in Sources */,
+				E78DD5EEB09FC61E8F498595 /* HttpDownloadListViewModel.swift in Sources */,
+				770BD91F68C194B62317BC13 /* HttpDownloadListViewController.swift in Sources */,
+				662B0EB50B0749393D8CB829 /* TorrentListViewController+HttpDownload.swift in Sources */,
+				B0146A725E820954BED76C15 /* SceneDelegate+HttpDownload.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2642,11 +2726,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		7CF9C2C52AF7F235009BBFA0 /* XCLocalSwiftPackageReference "Submodules/MVVMFoundation" */ = {
+		7CF9C2C52AF7F235009BBFA0 /* XCLocalSwiftPackageReference "MVVMFoundation" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Submodules/MVVMFoundation;
 		};
-		D1DB71812BD80318007F9267 /* XCLocalSwiftPackageReference "Submodules/GCDWebServer" */ = {
+		D1DB71812BD80318007F9267 /* XCLocalSwiftPackageReference "GCDWebServer" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Submodules/GCDWebServer;
 		};
@@ -2737,7 +2821,7 @@
 		};
 		D10257D02EE8640A00201640 /* MvvmFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7CF9C2C52AF7F235009BBFA0 /* XCLocalSwiftPackageReference "Submodules/MVVMFoundation" */;
+			package = 7CF9C2C52AF7F235009BBFA0 /* XCLocalSwiftPackageReference "MVVMFoundation" */;
 			productName = MvvmFoundation;
 		};
 		D135C58B2AEF158000440680 /* CombineCocoa */ = {
