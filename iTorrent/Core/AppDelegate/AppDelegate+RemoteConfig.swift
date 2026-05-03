@@ -6,6 +6,7 @@
 //
 import UIKit
 #if canImport(FirebaseCore)
+import FirebaseCore
 import FirebaseRemoteConfig
 #endif
 
