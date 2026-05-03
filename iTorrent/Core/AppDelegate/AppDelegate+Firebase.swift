@@ -15,8 +15,9 @@ extension AppDelegate {
 #if canImport(FirebaseCore)
         guard let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
               let options = FirebaseOptions(contentsOfFile: path),
-              options.apiKey.hasPrefix("A"),
-              options.apiKey.count == 39
+              let apiKey = options.apiKey,
+              apiKey.hasPrefix("A"),
+              apiKey.count == 39
         else { return }
         FirebaseApp.configure(options: options)
 #endif
