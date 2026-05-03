@@ -101,7 +101,7 @@ class TorrentListViewModel: BaseViewModel {
             .map { sections, downloads in
                 TorrentListViewModel.injectHttpSection(downloads, into: sections)
             }
-            }.assign(to: &$sections)
+            .assign(to: &$sections)
             $searchQuery.assign(to: &rssSearchViewModel.$searchQuery)
 //        }
     }
