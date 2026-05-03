@@ -2,32 +2,12 @@
 //  TorrentListViewController+HttpDownload.swift
 //  iTorrent
 //
-//  Add this file alongside TorrentListViewController.swift.
-//
-//  HOW TO INTEGRATE:
-//  1. In TorrentListViewController.swift, inside the addButton.menu children array,
-//     add makeHttpDownloadAction() as the last item:
-//
-//      addButton.menu = UIMenu(title: %"list.add.title", children: [
-//          ...,
-//          makeHttpDownloadAction(),
-//      ])
-//
-//  2. In viewDidLoad, after toolbar setup:
-//
-//      let downloadsBtn = makeDownloadsButton()
-//      navigationItem.rightBarButtonItems = (navigationItem.rightBarButtonItems ?? []) + [downloadsBtn]
-//
 
 import Combine
 import UIKit
 import ObjectiveC
 
 extension TorrentListViewController {
-
-    // MARK: - Downloads Nav Button
-
-    
 
     // MARK: - Add menu action
 
@@ -76,8 +56,8 @@ extension TorrentListViewController {
                 return
             }
 
-            let item = HttpDownloadService.shared.startDownload(from: url)
-            self.showDownloadStartedToast(for: item)
+            HttpDownloadService.shared.startDownload(from: url)
+            self.showDownloadStartedBanner()
         }
         alert.addAction(download)
         alert.preferredAction = download
@@ -96,64 +76,13 @@ extension TorrentListViewController {
         present(err, animated: true)
     }
 
-    private func showDownloadStartedToast(for item: HttpDownloadItem) {
+    private func showDownloadStartedBanner() {
         let banner = UIAlertController(
             title: "Download Started",
-            message: item.fileName,
+            message: "Track progress in the main list",
             preferredStyle: .alert
         )
-        banner.addAction(UIAlertAction(title: "View Downloads", style: .default) { [weak self] _ in
-            self?.openHttpDownloads()
-        })
         banner.addAction(UIAlertAction(title: "OK", style: .cancel))
         present(banner, animated: true)
-    }
-}
-
-// MARK: - Cancellable storage
-
-private var downloadCancellablesKey: UInt8 = 0
-
-extension TorrentListViewController {
-    var downloadCancellables: Set<AnyCancellable> {
-        get {
-            if let existing = objc_getAssociatedObject(self, &downloadCancellablesKey) as? Set<AnyCancellable> {
-                return existing
-            }
-            let new = Set<AnyCancellable>()
-            objc_setAssociatedObject(self, &downloadCancellablesKey, new, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return new
-        }
-        set {
-            objc_setAssociatedObject(self, &downloadCancellablesKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
-// MARK: - UIBarButtonItem badge
-
-extension UIBarButtonItem {
-    func setBadgeValue(_ value: String?) {
-        guard let view = self.value(forKey: "view") as? UIView else { return }
-        view.subviews.first(where: { $0.accessibilityIdentifier == "badge" })?.removeFromSuperview()
-        guard let value else { return }
-
-        let badge = UILabel()
-        badge.accessibilityIdentifier = "badge"
-        badge.text = value
-        badge.textColor = .white
-        badge.backgroundColor = .systemRed
-        badge.font = .systemFont(ofSize: 10, weight: .bold)
-        badge.textAlignment = .center
-        badge.layer.cornerRadius = 8
-        badge.layer.masksToBounds = true
-        badge.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(badge)
-        NSLayoutConstraint.activate([
-            badge.widthAnchor.constraint(greaterThanOrEqualToConstant: 16),
-            badge.heightAnchor.constraint(equalToConstant: 16),
-            badge.topAnchor.constraint(equalTo: view.topAnchor),
-            badge.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
     }
 }
