@@ -1,12 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
-    "%@" : {
-
-    },
     "%@ of %@ (%@)" : {
       "localizations" : {
         "de" : {
@@ -98,9 +92,6 @@
           }
         }
       }
-    },
-    "Add Torrent" : {
-
     },
     "add.dismiss.message" : {
       "extractionState" : "manual",
@@ -1255,12 +1246,6 @@
         }
       }
     },
-    "Delete Keeping Files" : {
-
-    },
-    "Delete With Files" : {
-
-    },
     "details.actions" : {
       "localizations" : {
         "de" : {
@@ -2256,7 +2241,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zapisano W"
+            "value" : "Obecna ścieżka"
           }
         },
         "ru" : {
@@ -2486,7 +2471,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odśwież hasz"
+            "value" : "Odnów hasz"
           }
         },
         "ru" : {
@@ -2532,7 +2517,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odśwież hasz"
+            "value" : "Odnów hasz"
           }
         },
         "ru" : {
@@ -2624,7 +2609,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odśwież hasz Torrenta"
+            "value" : "Odnów hasz Torrenta"
           }
         },
         "ru" : {
@@ -3084,7 +3069,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Transfer Danych"
+            "value" : "Przenieś"
           }
         },
         "ru" : {
@@ -3422,9 +3407,6 @@
           }
         }
       }
-    },
-    "Dict: %@" : {
-
     },
     "encryptionPolicy.disabled" : {
       "localizations" : {
@@ -3885,12 +3867,6 @@
           }
         }
       }
-    },
-    "Files" : {
-
-    },
-    "General" : {
-
     },
     "initialSetup.cellular.allowCheck.confirm" : {
       "localizations" : {
@@ -4904,6 +4880,87 @@
         }
       }
     },
+    "list.add.http" : {
+      "comment" : "Menu action for HTTP download",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP Link"
+          }
+        }
+      }
+    },
+    "list.add.http.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download from HTTP"
+          }
+        }
+      }
+    },
+    "list.add.http.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a direct download link (http:// or https://)"
+          }
+        }
+      }
+    },
+    "list.add.http.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://example.com/file.zip"
+          }
+        }
+      }
+    },
+    "list.add.http.error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid http:// or https:// URL."
+          }
+        }
+      }
+    },
+    "httpDownloads.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP Downloads"
+          }
+        }
+      }
+    },
+    "httpDownloads.empty" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No active downloads"
+          }
+        }
+      }
+    },
+    "httpDownloads.clearDone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Done"
+          }
+        }
+      }
+    },
     "list.empty.filter.subtitle" : {
       "localizations" : {
         "de" : {
@@ -5627,7 +5684,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dostępne"
+            "value" : "Gratis"
           }
         },
         "ru" : {
@@ -6750,9 +6807,6 @@
           }
         }
       }
-    },
-    "Peers" : {
-
     },
     "preferences" : {
       "localizations" : {
@@ -8853,7 +8907,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Po ukończeniu pobierania"
+            "value" : "Po zakończeniu pobierania"
           }
         },
         "ru" : {
@@ -9129,7 +9183,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zakończ po pobraniu"
+            "value" : "Zakończ po ukończeniu pobierania"
           }
         },
         "ru" : {
@@ -9399,13 +9453,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utilizza un browser web per la condivisione file"
+            "value" : "Utilizza un browser web per la condivisione file "
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Użyj jakiejkolwiek przeglądarki do udostępniania plików"
+            "value" : "Do udostępniania plików możesz jakiejkolwiek przeglądarki"
           }
         },
         "ru" : {
@@ -10280,7 +10334,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nazwa"
+            "value" : "Tytuł"
           }
         },
         "ru" : {
@@ -10802,9 +10856,6 @@
           }
         }
       }
-    },
-    "Primary Info" : {
-
     },
     "prioriry.change.title" : {
       "localizations" : {
@@ -11939,7 +11990,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nazwa"
+            "value" : "Tytuł"
           }
         },
         "ru" : {
@@ -12277,9 +12328,6 @@
           }
         }
       }
-    },
-    "Search" : {
-
     },
     "time.day.single" : {
       "localizations" : {
@@ -13707,9 +13755,6 @@
         }
       }
     },
-    "Trackers" : {
-
-    },
     "trackers.action.copy" : {
       "localizations" : {
         "de" : {
@@ -14491,9 +14536,6 @@
           }
         }
       }
-    },
-    "Transfer" : {
-
     },
     "webserver.unavailable" : {
       "localizations" : {
