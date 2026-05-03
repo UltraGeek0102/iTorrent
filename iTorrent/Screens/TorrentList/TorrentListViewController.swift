@@ -122,8 +122,7 @@ class TorrentListViewController<VM: TorrentListViewModel>: BaseViewController<VM
                 }
             }
         }
-        let downloadsBtn = makeDownloadsButton()
-        navigationItem.rightBarButtonItems = (navigationItem.rightBarButtonItems ?? []) + [downloadsBtn]
+        
 
         binding()
 
