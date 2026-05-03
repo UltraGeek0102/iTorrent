@@ -13,7 +13,12 @@ import FirebaseCore
 extension AppDelegate {
     func registerFirebase() {
 #if canImport(FirebaseCore)
-        FirebaseApp.configure()
+        guard let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+              let options = FirebaseOptions(contentsOfFile: path),
+              options.apiKey.hasPrefix("A"),
+              options.apiKey.count == 39
+        else { return }
+        FirebaseApp.configure(options: options)
 #endif
     }
 }
